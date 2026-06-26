@@ -1,0 +1,25 @@
+
+BasedOnStyle: LLVM
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+ColumnLimit: 100
+
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: None
+
+PointerAlignment: Right
+
+SortIncludes: true
+
+SpaceBeforeParens: ControlStatements
+
+IndentCaseLabels: true
+
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+
+MaxEmptyLinesToKeep: 1
+KeepEmptyLinesAtTheStartOfBlocks: false

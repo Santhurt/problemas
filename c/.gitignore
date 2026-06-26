@@ -1,0 +1,11 @@
+# Compiled object / precompiled headers
+*.o
+*.obj
+*.gch
+*.pch
+
+# Binaries / executables
+a.out
+app
+*.exe
+*.out
