@@ -110,5 +110,22 @@ def longestSubstring(strn = ""):
 
     return strn[bestStart:bestStart + bestLength]
 
+def findMaxAvg(nums, k):
+    sum = 0
+    start = 0
+    maxAvg = -math.inf
+
+    for end in range(len(nums)):
+        sum += nums[end]
+
+        if end >= k - 1:
+            currentAvg = sum / k
+            maxAvg = currentAvg if currentAvg > maxAvg else maxAvg
+
+            sum -= nums[start]
+            start += 1
+
+    return maxAvg
+
 
 

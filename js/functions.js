@@ -80,4 +80,5 @@ export const Problems = {
 
         return str.slice(bestStar, bestStar + bestLength);
     },
+    findMaxAverage: function (nums = [], k = 0) {},
 };
