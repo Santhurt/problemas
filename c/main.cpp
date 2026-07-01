@@ -5,6 +5,7 @@
 #include <istream>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 void execCountVocals() {
     std::cout << "Ingrese una cadena\n";
@@ -37,6 +38,12 @@ void execLongestSubstring() {
     std::cout << result << "\n";
 }
 
+void execFindMaxAverage() {
+    std::vector<int> nums{1, 12, -5, -6, 50, 3};
+    double           result = findMaxAverage(nums, 4);
+    std::cout << result << "\n";
+}
+
 int main(void) {
     std::cout << "Ingrese un problema: \n";
     int problem{};
@@ -55,6 +62,10 @@ int main(void) {
 
         case 4:
             execLongestSubstring();
+            break;
+
+        case 5:
+            execFindMaxAverage();
             break;
 
         default:

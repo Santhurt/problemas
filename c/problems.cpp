@@ -5,6 +5,7 @@
 #include <string_view>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 int countVocals(std::string_view str) {
     std::array<char, 5> vocals{'a', 'e', 'i', 'o', 'u'};
@@ -85,6 +86,7 @@ std::string_view minimunSubstring(std::string_view str, std::string_view substr)
 
         if (need.find(ch) != need.end() && window[ch] == need[ch]) {
             formed++;
+            xecLongestSubstring();
         }
 
         while (required == formed) {
@@ -132,4 +134,24 @@ std::string_view longestSubstring(std::string_view str) {
     }
 
     return str.substr(bestStart, bestLen);
+}
+
+double findMaxAverage(std::vector<int> &nums, int k) {
+    int    sum{0};
+    int    start{0};
+    double maxAvg{std::numeric_limits<int>::min()};
+
+    for (size_t end{0}; end < nums.size(); end++) {
+        sum += nums[end];
+
+        if (end >= k - 1) {
+            double currentAvg{static_cast<double>(sum) / k};
+            maxAvg = (currentAvg > maxAvg) ? currentAvg : maxAvg;
+
+            sum -= nums[start];
+            start++;
+        }
+    }
+
+    return maxAvg;
 }
