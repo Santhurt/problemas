@@ -1,6 +1,7 @@
 #include <array>
 #include <cstddef>
 #include <limits>
+#include <set>
 #include <string>
 #include <string_view>
 #include <unordered_map>
@@ -154,4 +155,46 @@ double findMaxAverage(std::vector<int> &nums, int k) {
     }
 
     return maxAvg;
+}
+
+bool ContainsNearByDuplicate(std::vector<int> &nums, int k) {
+    std::set<int> set{};
+
+    for (size_t end = 0; end < nums.size(); end++) {
+        int num{nums[end]};
+
+        if (set.find(num) != set.end()) {
+            return true;
+        }
+
+        set.insert(num);
+
+        if (end >= k) {
+            set.erase(nums[end - k]);
+        }
+    }
+
+    return true;
+}
+
+int maxVowels(std::string_view str, int k) {
+    std::set<char> vowels{'a', 'e', 'i', 'o', 'u'};
+    int            maxCount{0};
+    int            count{0};
+
+    for (size_t end{0}; end < str.length(); end++) {
+        auto ch{str[end]};
+
+        if (vowels.find(ch) != vowels.end()) {
+            count++;
+        }
+
+        if (end + 1 > k && vowels.find(str[end - k]) != vowels.end()) {
+            count--;
+        }
+
+        maxCount = (count > maxCount) ? count : maxCount;
+    }
+
+    return maxCount;
 }

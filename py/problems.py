@@ -127,5 +127,20 @@ def findMaxAvg(nums, k):
 
     return maxAvg
 
+def maxVowels(s, k): 
+    count = 0;
+    maxCount = 0;
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+
+    for end, ch in enumerate(s):
+        if ch in vowels:
+            count += 1
+
+        if end >= k - 1 and ch in vowels:
+            count-=1
+
+        maxCount = count if count > maxCount else maxCount
+
+    return maxCount
 
 
