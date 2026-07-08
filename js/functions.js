@@ -121,4 +121,5 @@ export const Problems = {
             }
         }
     },
+    findMaxAverage: function (nums = [], k = 0) {},
 };

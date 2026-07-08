@@ -3,10 +3,12 @@
 #include <cmath>
 #include <cstddef>
 #include <limits>
+#include <set>
 #include <string>
 #include <string_view>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 int countVocals(std::string_view str) {
     std::array<char, 5> vocals {'a', 'e', 'i', 'o', 'u'};
@@ -87,6 +89,7 @@ std::string_view minimunSubstring(std::string_view str, std::string_view substr)
 
         if (need.find(ch) != need.end() && window[ch] == need[ch]) {
             formed++;
+            xecLongestSubstring();
         }
 
         while (required == formed) {
@@ -169,17 +172,76 @@ bool checkInclusion(std::string_view s1, std::string_view s2) {
         target[ch]++;
     }
 
-
     for (size_t end {0}; end < s2.length(); end++) {
         char ch {s2[end]};
         window[ch]++;
 
-        if(window.size() == s1.length()) {
+        if (window.size() == s1.length()) {
 
-            
         }
-
     }
 
     return false;
+}
+
+double findMaxAverage(std::vector<int> &nums, int k) {
+    int    sum{0};
+    int    start{0};
+    double maxAvg{std::numeric_limits<int>::min()};
+
+    for (size_t end{0}; end < nums.size(); end++) {
+        sum += nums[end];
+
+        if (end >= k - 1) {
+            double currentAvg{static_cast<double>(sum) / k};
+            maxAvg = (currentAvg > maxAvg) ? currentAvg : maxAvg;
+
+            sum -= nums[start];
+            start++;
+        }
+    }
+
+    return maxAvg;
+}
+
+bool ContainsNearByDuplicate(std::vector<int> &nums, int k) {
+    std::set<int> set{};
+
+    for (size_t end = 0; end < nums.size(); end++) {
+        int num{nums[end]};
+
+        if (set.find(num) != set.end()) {
+            return true;
+        }
+
+        set.insert(num);
+
+        if (end >= k) {
+            set.erase(nums[end - k]);
+        }
+    }
+
+    return true;
+}
+
+int maxVowels(std::string_view str, int k) {
+    std::set<char> vowels{'a', 'e', 'i', 'o', 'u'};
+    int            maxCount{0};
+    int            count{0};
+
+    for (size_t end{0}; end < str.length(); end++) {
+        auto ch{str[end]};
+
+        if (vowels.find(ch) != vowels.end()) {
+            count++;
+        }
+
+        if (end + 1 > k && vowels.find(str[end - k]) != vowels.end()) {
+            count--;
+        }
+
+        maxCount = (count > maxCount) ? count : maxCount;
+    }
+
+    return maxCount;
 }

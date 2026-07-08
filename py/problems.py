@@ -110,5 +110,37 @@ def longestSubstring(strn = ""):
 
     return strn[bestStart:bestStart + bestLength]
 
+def findMaxAvg(nums, k):
+    sum = 0
+    start = 0
+    maxAvg = -math.inf
+
+    for end in range(len(nums)):
+        sum += nums[end]
+
+        if end >= k - 1:
+            currentAvg = sum / k
+            maxAvg = currentAvg if currentAvg > maxAvg else maxAvg
+
+            sum -= nums[start]
+            start += 1
+
+    return maxAvg
+
+def maxVowels(s, k): 
+    count = 0;
+    maxCount = 0;
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+
+    for end, ch in enumerate(s):
+        if ch in vowels:
+            count += 1
+
+        if end >= k - 1 and ch in vowels:
+            count-=1
+
+        maxCount = count if count > maxCount else maxCount
+
+    return maxCount
 
 
