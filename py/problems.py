@@ -143,4 +143,34 @@ def maxVowels(s, k):
 
     return maxCount
 
+def checkInclusion(s1 = "", s2 = ""):
+    target = {}
+    window = {}
+    start = 0
+
+    for ch in s1:
+        if ch in target:
+            target[ch] += 1
+        else:
+            target[ch] = 1
+
+    for end, ch in enumerate(s2):
+        if ch in window:
+            window[ch] += 1
+        else:
+            window[ch] = 1
+
+        if end >= len(s1) - 1:
+            if window == target:
+                return True
+
+            window[s2[start]] -= 1
+
+            if window[s2[start]] == 0:
+                window.pop(s2[start])
+
+            start += 1
+
+    return False
+
 
