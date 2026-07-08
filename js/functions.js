@@ -103,10 +103,22 @@ export const Problems = {
             tail.next = sumNode;
 
             tail = tail.next;
-            l1 = l1.next;
-            l2 = l2.next;
+            l1 = l1 ? l1.next : l1;
+            l2 = l2 ? l2.next : l2;
         }
 
-        dummy.print();
+        dummy.next.print();
+    },
+    checkInclusion: function (s1 = "", s2 = "") {
+        let start = 0;
+        let map = {};
+
+        for (let end = 0; end < s2.length; end++) {
+            let ch = s2;
+
+            if (ch in map) {
+                map[ch]++;
+            }
+        }
     },
 };

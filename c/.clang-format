@@ -1,25 +1,42 @@
 
+# .clang-format
+
 BasedOnStyle: LLVM
 
-IndentWidth: 4
-TabWidth: 4
-UseTab: Never
+# Ajustes personalizados
+IndentWidth: 4                         # Sangría de 4 espacios
+ColumnLimit: 100                       # Límite de columnas
+BreakBeforeBraces: Attach              # Llaves en la misma línea del control
+AllowShortFunctionsOnASingleLine: None # No permitir funciones cortas en una sola línea
+SpaceBeforeCpp11BracedList: true       # Espacio antes de listas entre llaves (C++11)
 
-ColumnLimit: 100
+# Recomendaciones adicionales para estilo profesional
+DerivePointerAlignment: false
+PointerAlignment: Left                 # Estilo preferido: `int* ptr` en lugar de `int *ptr`
 
-AllowShortIfStatementsOnASingleLine: Never
-AllowShortFunctionsOnASingleLine: None
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackParameters: false               # No empacar parámetros en una línea
+BinPackArguments: false                # No empacar argumentos en una línea
 
-PointerAlignment: Right
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+BreakConstructorInitializersBeforeComma: true
 
-SortIncludes: true
-
-SpaceBeforeParens: ControlStatements
-
-IndentCaseLabels: true
-
+AlignAfterOpenBracket: Align
+AlignOperands: true
 AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
+AlignTrailingComments: true
 
-MaxEmptyLinesToKeep: 1
-KeepEmptyLinesAtTheStartOfBlocks: false
+SpacesInParentheses: false
+SpaceInEmptyParentheses: false
+SpaceAfterCStyleCast: true
+
+Cpp11BracedListStyle: true
+Standard: Latest
+
+# Opcional, si trabajas con C:
+Language: Cpp
+
+# Otros posibles ajustes útiles (descomenta si los necesitas)
+# SortIncludes: true
+# IncludeBlocks: Regroup

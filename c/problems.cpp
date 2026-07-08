@@ -1,4 +1,6 @@
+#include "data.h"
 #include <array>
+#include <cmath>
 #include <cstddef>
 #include <limits>
 #include <string>
@@ -7,17 +9,17 @@
 #include <unordered_set>
 
 int countVocals(std::string_view str) {
-    std::array<char, 5> vocals{'a', 'e', 'i', 'o', 'u'};
-    int                 count{0};
+    std::array<char, 5> vocals {'a', 'e', 'i', 'o', 'u'};
+    int                 count {0};
 
     for (char ch : str) {
         switch (ch) {
-            case 'a':
-            case 'e':
-            case 'i':
-            case 'o':
-            case 'u':
-                count++;
+        case 'a':
+        case 'e':
+        case 'i':
+        case 'o':
+        case 'u':
+            count++;
         }
     }
     return count;
@@ -38,8 +40,8 @@ int isPalindrome(std::string_view str, int i, int j) {
 }
 
 std::string_view longestPalindrome(std::string_view str) {
-    for (size_t i{str.length()}; i > 0; i--) {
-        for (size_t start{0}; start <= str.length() - i; start++) {
+    for (size_t i {str.length()}; i > 0; i--) {
+        for (size_t start {0}; start <= str.length() - i; start++) {
             if (isPalindrome(str, start, start + i)) {
                 return str.substr(start, i);
             }
@@ -50,7 +52,7 @@ std::string_view longestPalindrome(std::string_view str) {
 }
 
 std::unordered_map<char, int> countRepeated(std::string_view str) {
-    std::unordered_map<char, int> map{};
+    std::unordered_map<char, int> map {};
 
     for (char ch : str) {
         map[ch]++;
@@ -64,23 +66,23 @@ std::string_view minimunSubstring(std::string_view str, std::string_view substr)
         return "";
     }
 
-    std::unordered_map<char, int> need{};
+    std::unordered_map<char, int> need {};
 
     for (auto ch : substr) {
         need[ch]++;
     }
 
-    std::unordered_map<char, int> window{};
+    std::unordered_map<char, int> window {};
 
-    size_t required{need.size()};
-    int    formed{0};
+    size_t required {need.size()};
+    int    formed {0};
 
-    size_t start{0};
-    int    bestLen{std::numeric_limits<int>::max()};
-    size_t bestStart{0};
+    size_t start {0};
+    int    bestLen {std::numeric_limits<int>::max()};
+    size_t bestStart {0};
 
     for (size_t right = 0; right < str.length(); right++) {
-        char ch{str[right]};
+        char ch {str[right]};
         window[ch]++;
 
         if (need.find(ch) != need.end() && window[ch] == need[ch]) {
@@ -109,11 +111,11 @@ std::string_view minimunSubstring(std::string_view str, std::string_view substr)
 }
 
 std::string_view longestSubstring(std::string_view str) {
-    std::unordered_set<char> window{};
+    std::unordered_set<char> window {};
 
-    size_t start{};
-    size_t bestStart{};
-    size_t bestLen{};
+    size_t start {};
+    size_t bestStart {};
+    size_t bestLen {};
 
     for (size_t rigth = 0; rigth < str.length(); rigth++) {
         char ch = str[rigth];
@@ -132,4 +134,52 @@ std::string_view longestSubstring(std::string_view str) {
     }
 
     return str.substr(bestStart, bestLen);
+}
+
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+    ListNode  dummy {};
+    ListNode* tail {&dummy};
+    int       carry {0};
+
+    while (l1 || l2 || carry) {
+        int x {l1 ? l1->val : 0};
+        int y {l2 ? l2->val : 0};
+
+        int sum {x + y + carry};
+        carry = sum / 10;
+
+        tail->next = new ListNode(sum % 10);
+        tail       = tail->next;
+
+        if (l1)
+            l1 = l1->next;
+        if (l2)
+            l2 = l2->next;
+    }
+
+    return dummy.next;
+}
+
+// Input: s1 = "ab", s2 = "eidbaooo"
+bool checkInclusion(std::string_view s1, std::string_view s2) {
+    std::unordered_map<char, int> target {};
+    std::unordered_map<char, int> window {};
+
+    for (char ch : s1) {
+        target[ch]++;
+    }
+
+
+    for (size_t end {0}; end < s2.length(); end++) {
+        char ch {s2[end]};
+        window[ch]++;
+
+        if(window.size() == s1.length()) {
+
+            
+        }
+
+    }
+
+    return false;
 }

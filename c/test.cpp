@@ -1,13 +1,12 @@
-#include <cstddef>
 #include <iostream>
 
 int main() {
-    int sum{0};
-    int n{10};
+    int* ptr {new int};
+    *ptr = 7;
 
-    for (size_t i{1}; i <= 10; i++) {
-        sum += i;
-    }
+    delete ptr;
 
-    std::cout << "La suma es: " << sum << "\n";
+    std::cout << *ptr;
+
+    return 0;
 }

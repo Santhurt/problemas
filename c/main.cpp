@@ -8,58 +8,67 @@
 
 void execCountVocals() {
     std::cout << "Ingrese una cadena\n";
-    std::string str{};
+    std::string str {};
     std::getline(std::cin >> std::ws, str);
     std::cout << "La cantidad de vocales es: " << countVocals(str) << "\n";
 }
 
 void execLongestPalindrome() {
     std::cout << "Ingrese una cadena\n";
-    std::string str{};
+    std::string str {};
     std::getline(std::cin >> std::ws, str);
-    std::string result{longestPalindrome(str)};
+    std::string result {longestPalindrome(str)};
     std::cout << "El palindromo mas largo es: " << result << "\n";
 }
 
 void execCountRepeated() {
     std::cout << "Ingrese una cadena\n";
-    std::string str{};
+    std::string str {};
     std::getline(std::cin >> std::ws, str);
-    std::unordered_map<char, int> map{countRepeated(str)};
+    std::unordered_map<char, int> map {countRepeated(str)};
     printMap(map);
 }
 
 void execLongestSubstring() {
     std::cout << "Ingrese una cadena\n";
-    std::string str{};
+    std::string str {};
     std::getline(std::cin >> std::ws, str);
-    std::string result{longestSubstring(str)};
+    std::string result {longestSubstring(str)};
     std::cout << result << "\n";
+}
+
+void execCheckInclusion() {
+    std::cout << checkInclusion("ab", "eidbaooo") << "\n";
+    std::cout << checkInclusion("ab", "eidboaoo") << "\n";
 }
 
 int main(void) {
     std::cout << "Ingrese un problema: \n";
-    int problem{};
+    int problem {};
     std::cin >> problem;
 
     switch (problem) {
-        case 1:
-            execCountVocals();
-            break;
-        case 2:
-            execLongestPalindrome();
-            break;
-        case 3:
-            execCountRepeated();
-            break;
+    case 1:
+        execCountVocals();
+        break;
+    case 2:
+        execLongestPalindrome();
+        break;
+    case 3:
+        execCountRepeated();
+        break;
 
-        case 4:
-            execLongestSubstring();
-            break;
+    case 4:
+        execLongestSubstring();
+        break;
 
-        default:
-            std::cout << "Problema invalido";
-            break;
+    case 5:
+        execCheckInclusion();
+        break;
+
+    default:
+        std::cout << "Problema invalido";
+        break;
     }
 
     return 0;
