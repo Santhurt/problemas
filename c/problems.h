@@ -15,6 +15,8 @@ std::string_view longestSubstring(std::string_view str);
 
 bool checkInclusion(std::string_view s1, std::string_view s2);
 
-double findMaxAverage(std::vector<int> &nums, int k);
+double findMaxAverage(std::vector<int>& nums, int k);
+
+int reverseInteger(int x);
 
 #endif // !VOWELS_H

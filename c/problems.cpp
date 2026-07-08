@@ -1,10 +1,11 @@
 #include "data.h"
+#include "utils.h"
 #include <array>
 #include <cmath>
 #include <cstddef>
+#include <iostream>
 #include <limits>
 #include <set>
-#include <string>
 #include <string_view>
 #include <unordered_map>
 #include <unordered_set>
@@ -89,7 +90,6 @@ std::string_view minimunSubstring(std::string_view str, std::string_view substr)
 
         if (need.find(ch) != need.end() && window[ch] == need[ch]) {
             formed++;
-            xecLongestSubstring();
         }
 
         while (required == formed) {
@@ -167,6 +167,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 bool checkInclusion(std::string_view s1, std::string_view s2) {
     std::unordered_map<char, int> target {};
     std::unordered_map<char, int> window {};
+    size_t                        start {0};
 
     for (char ch : s1) {
         target[ch]++;
@@ -176,24 +177,28 @@ bool checkInclusion(std::string_view s1, std::string_view s2) {
         char ch {s2[end]};
         window[ch]++;
 
-        if (window.size() == s1.length()) {
-
+        if (end >= s1.length() - 1) {
+            if (window == target) {
+                return true;
+            }
+            window[s2[start]]--;
+            start++;
         }
     }
 
     return false;
 }
 
-double findMaxAverage(std::vector<int> &nums, int k) {
-    int    sum{0};
-    int    start{0};
-    double maxAvg{std::numeric_limits<int>::min()};
+double findMaxAverage(std::vector<int>& nums, int k) {
+    int    sum {0};
+    int    start {0};
+    double maxAvg {std::numeric_limits<int>::min()};
 
-    for (size_t end{0}; end < nums.size(); end++) {
+    for (size_t end {0}; end < nums.size(); end++) {
         sum += nums[end];
 
         if (end >= k - 1) {
-            double currentAvg{static_cast<double>(sum) / k};
+            double currentAvg {static_cast<double>(sum) / k};
             maxAvg = (currentAvg > maxAvg) ? currentAvg : maxAvg;
 
             sum -= nums[start];
@@ -204,11 +209,11 @@ double findMaxAverage(std::vector<int> &nums, int k) {
     return maxAvg;
 }
 
-bool ContainsNearByDuplicate(std::vector<int> &nums, int k) {
-    std::set<int> set{};
+bool ContainsNearByDuplicate(std::vector<int>& nums, int k) {
+    std::set<int> set {};
 
     for (size_t end = 0; end < nums.size(); end++) {
-        int num{nums[end]};
+        int num {nums[end]};
 
         if (set.find(num) != set.end()) {
             return true;
@@ -225,12 +230,12 @@ bool ContainsNearByDuplicate(std::vector<int> &nums, int k) {
 }
 
 int maxVowels(std::string_view str, int k) {
-    std::set<char> vowels{'a', 'e', 'i', 'o', 'u'};
-    int            maxCount{0};
-    int            count{0};
+    std::set<char> vowels {'a', 'e', 'i', 'o', 'u'};
+    int            maxCount {0};
+    int            count {0};
 
-    for (size_t end{0}; end < str.length(); end++) {
-        auto ch{str[end]};
+    for (size_t end {0}; end < str.length(); end++) {
+        auto ch {str[end]};
 
         if (vowels.find(ch) != vowels.end()) {
             count++;
@@ -244,4 +249,31 @@ int maxVowels(std::string_view str, int k) {
     }
 
     return maxCount;
+}
+
+bool addWillOverflow(int a, int b) {
+    if (b > 0 && a > std::numeric_limits<int>::max() - b)
+        return true;
+    if (b < 0 && a < std::numeric_limits<int>::min() - b)
+        return true;
+
+    return false;
+}
+
+int reverseInteger(int x) {
+    int cocient {x >= 0 ? x : (-1) * x};
+    int len {static_cast<int>(std::floor(std::log10(cocient)))};
+    int reversed {};
+    int i {0};
+
+    bool isNegative = (x < 0) ? true : false;
+
+    while (cocient != 0) {
+        int remainder {cocient % 10};
+        cocient = cocient / 10;
+        reversed += remainder * std::pow(10, len - i);
+        i++;
+    }
+
+    return isNegative ? (-1) * reversed : reversed;
 }

@@ -43,8 +43,15 @@ void execCheckInclusion() {
     std::cout << checkInclusion("ab", "eidboaoo") << "\n";
 }
 
+void execReverseInteger() {
+    std::cout << reverseInteger(123) << "\n";
+    std::cout << reverseInteger(-123) << "\n";
+    std::cout << reverseInteger(230) << "\n";
+    std::cout << reverseInteger(0) << "\n";
+}
+
 void execFindMaxAverage() {
-    std::vector<int> nums{1, 12, -5, -6, 50, 3};
+    std::vector<int> nums {1, 12, -5, -6, 50, 3};
     double           result = findMaxAverage(nums, 4);
     std::cout << result << "\n";
 }
@@ -64,19 +71,18 @@ int main(void) {
     case 3:
         execCountRepeated();
         break;
-
     case 4:
         execLongestSubstring();
         break;
-
     case 5:
         execCheckInclusion();
         break;
-
     case 6:
         execFindMaxAverage();
         break;
-
+    case 7:
+        execReverseInteger();
+        break;
     default:
         std::cout << "Problema invalido";
         break;
